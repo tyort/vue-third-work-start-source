@@ -28,5 +28,4 @@ export const DAY_IN_SEC = HOUR_IN_SEC * 24;
 export const MONTH_IN_SEC = DAY_IN_SEC * 30;
 export const YEAR_IN_SEC = DAY_IN_SEC * 365;
 export const DAY_IN_MILLISEC = DAY_IN_SEC * SEC;
-
 export const TAG_SEPARATOR = "#";

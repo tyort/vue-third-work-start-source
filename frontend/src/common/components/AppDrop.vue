@@ -16,8 +16,9 @@ function onDrop({ dataTransfer }) {
   const payload = dataTransfer.getData(DATA_TRANSFER_PAYLOAD);
   if (payload) {
     const transferData = JSON.parse(
-      dataTransfer.getData(DATA_TRANSFER_PAYLOAD),
+      dataTransfer.getData(DATA_TRANSFER_PAYLOAD)
     );
+    // drop - наименования события, далее идут аргументы, которые передаются в родительский компонент
     emit("drop", transferData);
   }
 }

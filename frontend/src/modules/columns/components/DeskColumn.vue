@@ -68,6 +68,10 @@ const state = reactive({
   isInputShowed: false,
   columnTitle: props.column.title,
 });
+
+// Родительский компонент HomeView, в который импортируется наш DeskColumn;
+// Указанные методы в массиве вызываются при появлении соответствующих событий(см.код выше в template);
+// Таким образом мы "эмитим" данные в родительский компонент;
 const emits = defineEmits(["update", "delete", "updateTasks"]);
 
 // Фильтруем задачи, которые относятся к конкретной колонке

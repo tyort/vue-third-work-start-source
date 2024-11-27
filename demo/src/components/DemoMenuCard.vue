@@ -1,8 +1,10 @@
 <template>
   <div class="card">
-    <h2 class="card__title">{{name}}</h2>
+    <h2 class="card__title">{{ name }}</h2>
     <p class="card__apply">
-      <router-link class="card__link" :to="link">Перейти к демонстрации</router-link>
+      <router-link class="card__link" :to="link"
+        >Перейти к демонстрации</router-link
+      >
     </p>
   </div>
 </template>
@@ -11,13 +13,13 @@
 defineProps({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   link: {
     type: String,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 </script>
 
 <style lang="scss" scoped>

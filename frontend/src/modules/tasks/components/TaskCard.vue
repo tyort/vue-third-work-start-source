@@ -3,6 +3,7 @@
   <app-drop @drop="$emit('drop', $event)">
     <!--      Компонент AppDrag определяет какая задача перемещается -->
     <app-drag :transfer-data="task">
+      <!-- Весь этот контент встанет вместо <slot /> у AppDrag -->
       <div class="task">
         <!--        Этот блок показывает пользователя, который работает над задачей-->
         <div v-if="task.user" class="task__user">

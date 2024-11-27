@@ -19,8 +19,11 @@ const props = defineProps({
   },
 });
 
+// Реактивные вычисляемые данные с помощью функции computed. Здесь (в script) чтобы увидеть значение нужно обращаться к .value; Но в template обращаемся без value.
 const tagsArray = computed(() => {
+  // Например props.tags === '#Для вёрстки#Бэкенд#Срочно#Фронтенд'
   return getTagsArrayFromString(props.tags);
+  // Вернет значение['Для вёрстки', 'Бэкенд', 'Срочно', 'Фронтенд']
 });
 </script>
 

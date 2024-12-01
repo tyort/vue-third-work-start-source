@@ -35,9 +35,10 @@ export const getImage = (image) => {
 };
 
 export const getTargetColumnTasks = (toColumnId, tasks) => {
-  return tasks
-    .filter((task) => task.columnId === toColumnId)
-    .map((task) => toRaw(task));
+  // tasks - это массив прокси объектов. который был обернут в реактивный объект Vue с помощью reactive или ref.
+  const proxyTasks = tasks.filter((task) => task.columnId === toColumnId);
+  // Получаем эти объекты в чистом виде, без обертки
+  return proxyTasks.map((task) => toRaw(task));
 };
 
 export const addActive = (active, toTask, tasks) => {

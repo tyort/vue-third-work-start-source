@@ -4,6 +4,7 @@
     :filters="state.filters"
     @update-tasks="updateTasks"
   >
+    <!-- RouterView отрисовывает компонент, который сопоставляется текущему URL. В нашем случае необходимо поместить такой компонент на верхний уровень приложения — в App.vue. -->
     <router-view
       :tasks="filteredTasks"
       :filters="state.filters"

@@ -4,7 +4,7 @@
     <!--      Компонент AppDrag определяет какая задача перемещается -->
     <app-drag :transfer-data="task">
       <!-- Весь этот контент встанет вместо <slot /> у AppDrag -->
-      <div class="task">
+      <div class="task" @click="router.push({ path: `/${task.id}` })">
         <!--        Этот блок показывает пользователя, который работает над задачей-->
         <div v-if="task.user" class="task__user">
           <div class="task__avatar">
@@ -48,15 +48,18 @@ import AppDrag from "@/common/components/AppDrag.vue";
 import AppDrop from "@/common/components/AppDrop.vue";
 import TaskCardTags from "./TaskCardTags.vue";
 import { getImage } from "@/common/helpers";
+import { useRouter } from "vue-router";
 
-const props = defineProps({
+const router = useRouter();
+
+defineProps({
   task: {
     type: Object,
     required: true,
   },
 });
 
-defineEmits(["drop"]);
+defineEmits(["drop", "click"]);
 </script>
 
 <style lang="scss" scoped>

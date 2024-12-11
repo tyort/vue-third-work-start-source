@@ -1,6 +1,11 @@
 <template>
   <main class="content">
     <section class="desk">
+      <!--      Отображение дочерних маршрутов-->
+      <router-view
+        :tasks="props.tasks"
+        @edit-task="$emit('editTask', $event)"
+      />
       <!--      Шапка доски-->
       <div class="desk__header">
         <h1 class="desk__title">Design Coffee Lab</h1>
@@ -95,7 +100,7 @@ const props = defineProps({
   },
 });
 
-defineEmits(["applyFilters", "updateTasks"]);
+defineEmits(["applyFilters", "updateTasks", "editTask"]);
 
 const state = reactive({ columns });
 

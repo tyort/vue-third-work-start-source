@@ -18,7 +18,6 @@ watch(
   async (meta) => {
     try {
       if (meta.layout) {
-        console.log("жопа");
         // Пробуем найти компонент из свойства meta и динамически импортировать его
         const component = await import(`./${meta.layout}.vue`);
         layout.value = component?.default || AppLayoutDefault;

@@ -89,13 +89,13 @@
         <task-card-tags :tags="task.tags" />
       </div>
       <!--Комментарии-->
-      <!-- <task-card-view-comments
+      <task-card-view-comments
         v-if="task"
         class="task-card__comments"
         :comments="task.comments || []"
         :task-id="task.id"
         @create-new-comment="addCommentToList"
-      /> -->
+      />
     </section>
   </div>
 </template>
@@ -107,7 +107,7 @@ import { getReadableDate, getImage } from "../common/helpers";
 import { useTaskCardDate } from "../common/composables";
 import TaskCardViewTicksList from "../modules/tasks/components/TaskCardViewTicksList.vue";
 import TaskCardTags from "../modules/tasks/components/TaskCardTags.vue";
-// import TaskCardViewComments from "../modules/tasks/components/TaskCardViewComments.vue";
+import TaskCardViewComments from "../modules/tasks/components/TaskCardViewComments.vue";
 
 const router = useRouter();
 // для получения информации о текущем маршруте и его параметрах.
@@ -146,12 +146,12 @@ const closeDialog = function () {
   router.push("/");
 };
 
-// const addCommentToList = function (comment) {
-//   if (!task.value.comments) {
-//     task.value.comments = [];
-//   }
-//   task.value.comments.push(comment);
-// };
+const addCommentToList = function (comment) {
+  if (!task.value.comments) {
+    task.value.comments = [];
+  }
+  task.value.comments.push(comment);
+};
 </script>
 
 <style lang="scss" scoped>

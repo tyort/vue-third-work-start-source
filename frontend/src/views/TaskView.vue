@@ -78,7 +78,7 @@
         v-if="task && task.ticks && task.ticks.length"
         class="task-card__block"
       >
-        <!-- <task-card-view-ticks-list :ticks="task.ticks" disabled /> -->
+        <task-card-view-ticks-list :ticks="task.ticks" disabled />
       </div>
       <!--Метки-->
       <div
@@ -105,13 +105,15 @@ import { computed, onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { getReadableDate, getImage } from "../common/helpers";
 import { useTaskCardDate } from "../common/composables";
-// import TaskCardViewTicksList from "../modules/tasks/components/TaskCardViewTicksList.vue";
+import TaskCardViewTicksList from "../modules/tasks/components/TaskCardViewTicksList.vue";
 import TaskCardTags from "../modules/tasks/components/TaskCardTags.vue";
 // import TaskCardViewComments from "../modules/tasks/components/TaskCardViewComments.vue";
 
 const router = useRouter();
+// для получения информации о текущем маршруте и его параметрах.
 const route = useRoute();
 
+// пропсы сюда попадают через AppLayoutMain. Конфигурация маршрута в routes.js
 const props = defineProps({
   tasks: {
     type: Array,
@@ -122,6 +124,7 @@ const props = defineProps({
 // доступ к элементу HTML
 const dialog = ref(null);
 
+// выполнения кода в момент внутри onMounted, когда компонент был смонтирован в DOM. Это происходит после того, как компонент полностью инициализирован и готов для отображения.
 onMounted(() => {
   // Фокусируем на диалоговом окне чтобы сработала клавиша esc без дополнительного клика на окне
   dialog.value.focus();
@@ -129,8 +132,11 @@ onMounted(() => {
 
 // Найдем задачу по id из массива задач
 const task = computed(() => {
+  // route.params равно примерно {id: '6'}
   return props.tasks.find((task) => task.id == route.params.id);
 });
+
+console.log(task.value);
 
 const dueDate = computed(() => {
   return getReadableDate(task.value.dueDate || "");

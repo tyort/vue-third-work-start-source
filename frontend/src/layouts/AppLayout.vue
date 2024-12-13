@@ -1,4 +1,5 @@
 <template>
+  <!-- :is — указать отображаемый компонент. Значение: или имя компонента; или переменная, содержащей имя компонента; либо ссылкой на объект компонента. -->
   <component :is="layout">
     <slot />
   </component>
@@ -16,13 +17,13 @@ const layout = shallowRef(null);
 watch(
   () => route.meta,
   async (meta) => {
+    // meta - это то, что мы прописали в routes в параметре meta
     try {
       if (meta.layout) {
-        // Пробуем найти компонент из свойства meta и динамически импортировать его
+        // из представленных в папке layouts пробуем найти тот, который пропписан в текущем маршруте
         const component = await import(`./${meta.layout}.vue`);
         layout.value = component?.default || AppLayoutDefault;
       } else {
-        console.log(AppLayoutDefault);
         layout.value = AppLayoutDefault;
       }
     } catch (e) {

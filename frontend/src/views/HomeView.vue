@@ -5,6 +5,7 @@
       <router-view
         :tasks="props.tasks"
         @edit-task="$emit('editTask', $event)"
+        @add-task="$emit('addTask', $event)"
       />
       <!--      Шапка доски-->
       <div class="desk__header">
@@ -100,7 +101,7 @@ const props = defineProps({
   },
 });
 
-defineEmits(["applyFilters", "updateTasks", "editTask"]);
+defineEmits(["applyFilters", "updateTasks", "editTask", "addTask"]);
 
 const state = reactive({ columns });
 

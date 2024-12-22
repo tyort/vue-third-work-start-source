@@ -120,16 +120,16 @@
         <!--        Список подзадач-->
         <task-card-view-ticks-list
           :ticks="task.ticks"
-          @createTick="createTick"
-          @updateTick="updateTick"
-          @removeTick="removeTick"
+          @create-tick="createTick"
+          @update-tick="updateTick"
+          @remove-tick="removeTick"
         />
       </div>
 
       <!--      Блок тегов-->
       <div class="task-card__block">
         <!--        Компонент создания тегов-->
-        <!-- <task-card-creator-tags :tags="task.tags" @setTags="setTags" /> -->
+        <task-card-creator-tags :tags="task.tags" @set-tags="setTags" />
       </div>
 
       <!--      Блок сохранения и отмены изменений-->
@@ -157,7 +157,7 @@ import { ref, onMounted, watch } from "vue";
 import TasksCardCreatorUserSelector from "./TaskCardCreatorUserSelector.vue";
 import TasksCardCreatorDueDateSelector from "./TaskCardCreatorDueDateSelector.vue";
 import TaskCardViewTicksList from "./TaskCardViewTicksList.vue";
-// import TaskCardCreatorTags from "./TaskCardCreatorTags.vue";
+import TaskCardCreatorTags from "./TaskCardCreatorTags.vue";
 import AppButton from "@/common/components/AppButton.vue";
 import { useRouter } from "vue-router";
 import { createUUIDv4, createNewDate } from "@/common/helpers";
@@ -288,9 +288,9 @@ function removeTick({ uuid, id }) {
   }
 }
 
-// function setTags(tags) {
-//   task.value.tags = tags;
-// }
+function setTags(tags) {
+  task.value.tags = tags;
+}
 
 function submit() {
   // Валидируем задачу

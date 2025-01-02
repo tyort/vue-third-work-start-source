@@ -249,7 +249,7 @@ function deleteTask() {
 
 function setStatus(status) {
   const [key] = Object.entries(taskStatuses).find(
-    ([_, value]) => value === status
+    ([, value]) => value === status
   );
   const taskStatus = task.value.statusId;
   if (!taskStatus || taskStatus !== +key) {

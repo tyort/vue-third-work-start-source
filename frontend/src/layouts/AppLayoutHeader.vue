@@ -2,17 +2,30 @@
   <header class="header">
     <div class="header__logo">
       <a href="#" class="logo">
-        <img
-          src="@/assets/img/logo.svg"
-          alt="VueWork logo"
-          width="147"
-          height="23"
-        />
+        <router-link to="/" class="logo">
+          <img
+            src="@/assets/img/logo.svg"
+            alt="VueWork logo"
+            width="147"
+            height="23"
+          />
+        </router-link>
       </a>
     </div>
 
     <form action="#" class="header__search">
-      <input type="search" name="search" required placeholder="Поиск" />
+      <input
+        type="search"
+        name="search"
+        required
+        placeholder="Поиск"
+        @input="
+          filtersStore.applyFilters({
+            item: $event.target.value,
+            entity: 'search',
+          })
+        "
+      />
       <button type="submit">Найти</button>
     </form>
 
@@ -44,6 +57,12 @@
     </div>
   </header>
 </template>
+
+<script setup>
+import { useFiltersStore } from "@/stores";
+
+const filtersStore = useFiltersStore();
+</script>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/ds-system/ds-system";

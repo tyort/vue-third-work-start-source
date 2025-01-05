@@ -108,18 +108,13 @@ import { useTaskCardDate } from "../common/composables";
 import TaskCardViewTicksList from "../modules/tasks/components/TaskCardViewTicksList.vue";
 import TaskCardTags from "../modules/tasks/components/TaskCardTags.vue";
 import TaskCardViewComments from "../modules/tasks/components/TaskCardViewComments.vue";
+import { useTasksStore } from "@/stores";
+
+const tasksStore = useTasksStore();
 
 const router = useRouter();
 // для получения информации о текущем маршруте и его параметрах.
 const route = useRoute();
-
-// пропсы сюда попадают через AppLayoutMain. Конфигурация маршрута в routes.js
-const props = defineProps({
-  tasks: {
-    type: Array,
-    required: true,
-  },
-});
 
 // доступ к элементу HTML
 const dialog = ref(null);
@@ -132,8 +127,7 @@ onMounted(() => {
 
 // Найдем задачу по id из массива задач
 const task = computed(() => {
-  // route.params равно примерно {id: '6'}
-  return props.tasks.find((task) => task.id == route.params.id);
+  return tasksStore.tasks.find((task) => task.id == route.params.id);
 });
 
 console.log(task.value);

@@ -13,5 +13,18 @@ export const useFiltersStore = defineStore("filters", {
       statuses,
     }),
   },
-  actions: {},
+  actions: {
+    applyFilters({ item, entity }) {
+      if (entity === "search") {
+        this.search = item;
+      } else {
+        const resultValues = [...this[entity]];
+        const itemIndex = resultValues.findIndex((el) => el === item);
+        ~itemIndex
+          ? resultValues.splice(itemIndex, 1)
+          : resultValues.push(item);
+        this.$patch({ [entity]: resultValues });
+      }
+    },
+  },
 });

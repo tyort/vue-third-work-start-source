@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import routes from "./routes";
+import { middlewarePipeline } from "@/middlewares";
 
 // Создаем экземпляр маршрутизатора
 // createWebHistory - копирует стандартное поведение браузера
@@ -8,5 +9,7 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });
+
+middlewarePipeline(router);
 
 export default router;

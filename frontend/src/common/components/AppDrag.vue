@@ -1,8 +1,7 @@
 <template>
-  <!-- dragstart - это событие(начало перетаскивания элемента), а onDrag является методом(придумали название)
-	 Компонент предотвращает события dragover и dragenter -->
+  <!--  Блокируем перенос блоков, если пользователь не вошёл в систему-->
   <div
-    :draggable="true"
+    :draggable="authStore.isAuthenticated"
     @dragstart.self="onDrag"
     @dragover.prevent
     @dragenter.prevent
@@ -13,7 +12,9 @@
 
 <script setup>
 import { DATA_TRANSFER_PAYLOAD, MOVE } from "../constants";
+import { useAuthStore } from "@/stores";
 
+const authStore = useAuthStore();
 const props = defineProps({
   transferData: {
     type: Object,

@@ -20,7 +20,7 @@ export default defineConfig({
     port: 8080,
     proxy: {
       "/api": {
-        target: "https://work.vue.pages.academy/",
+        target: "http://backend:3000/",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },

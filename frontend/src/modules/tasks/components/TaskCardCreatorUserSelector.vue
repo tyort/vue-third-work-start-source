@@ -12,7 +12,7 @@
       </button>
       <button v-else class="users-list__user">
         <img
-          :src="getImage(currentWorker.avatar)"
+          :src="getPublicImage(currentWorker.avatar)"
           @click.stop="isMenuOpened = !isMenuOpened"
         />
         <span @click.stop="isMenuOpened = !isMenuOpened">
@@ -29,9 +29,9 @@
           v-click-outside="hideUserMenu"
           class="users-list"
         >
-          <li v-for="user in users" :key="user.id">
+          <li v-for="user in usersStore.users" :key="user.id">
             <button class="users-list__user" @click="setUser(user.id)">
-              <img :src="getImage(user.avatar)" />
+              <img :src="getPublicImage(user.avatar)" />
               <span>{{ user.name }}</span>
             </button>
           </li>
@@ -42,23 +42,23 @@
 </template>
 
 <script setup>
-import users from "@/mocks/users.json";
 import { ref, computed } from "vue";
-import { getImage } from "../../../common/helpers";
+import { getPublicImage } from "../../../common/helpers";
 import AppIcon from "@/common/components/AppIcon.vue";
+import { useUsersStore } from "@/stores";
 
+const usersStore = useUsersStore();
 const props = defineProps({
   modelValue: {
     type: [String],
     default: null,
   },
 });
+
 const emits = defineEmits(["update:modelValue"]);
-
 const isMenuOpened = ref(false);
-
 const currentWorker = computed(() =>
-  users.find(({ id }) => id === props.modelValue)
+  usersStore.users.find(({ id }) => id === props.modelValue)
 );
 
 function setUser(id) {

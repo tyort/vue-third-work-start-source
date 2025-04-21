@@ -18,6 +18,7 @@
           </h1>
           <!--Кнопка редактирования задачи-->
           <a
+            v-if="authStore.getUserAttribute('isAdmin')"
             class="task-card__edit"
             @click="
               router.push({
@@ -42,7 +43,10 @@
             Участник:
             <div class="task-card__participant">
               <button type="button" class="task-card__user">
-                <img :src="getImage(task.user.avatar)" :alt="task.user.name" />
+                <img
+                  :src="getPublicImage(task.user.avatar)"
+                  :alt="task.user.name"
+                />
                 {{ task.user.name }}
               </button>
             </div>
@@ -103,14 +107,15 @@
 <script setup>
 import { computed, onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { getReadableDate, getImage } from "../common/helpers";
+import { getReadableDate, getPublicImage } from "../common/helpers";
 import { useTaskCardDate } from "../common/composables";
 import TaskCardViewTicksList from "../modules/tasks/components/TaskCardViewTicksList.vue";
 import TaskCardTags from "../modules/tasks/components/TaskCardTags.vue";
 import TaskCardViewComments from "../modules/tasks/components/TaskCardViewComments.vue";
-import { useTasksStore } from "@/stores";
+import { useTasksStore, useAuthStore } from "@/stores";
 
 const tasksStore = useTasksStore();
+const authStore = useAuthStore();
 
 const router = useRouter();
 // для получения информации о текущем маршруте и его параметрах.
@@ -127,7 +132,7 @@ onMounted(() => {
 
 // Найдем задачу по id из массива задач
 const task = computed(() => {
-  return tasksStore.tasks.find((task) => task.id == route.params.id);
+  return tasksStore.getTaskById(route.params.id);
 });
 
 console.log(task.value);
